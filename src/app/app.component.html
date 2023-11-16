@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="search-context">
+    <h3 class="static-info">Search any youtube content!!! or Paste your youtube link below!!!</h3>
+    <input type="text" class="input-text" [(ngModel)]="ytTextOrURL" placeholder="Paste Yotube URL or Search Youtube Content">
+    <button class="search-button" (click)="searchTextOrURL()" >
+      Search
+    </button>
+  </div>
+
+  <div class="video-section float-container">
+    <div class="play-video float-child1">
+      <iframe class="play-frame" id="mainFrame" [src]="safeUrl" frameborder="0" allowfullscreen  allow='autoplay'></iframe>
+    </div>
+    <div class="video-list float-child2">
+      <h2 *ngIf="videosData.length > 0" >Related videos</h2>
+      <ul *ngFor="let videoData of videosData" class="watched-videos">
+        <div class="related-videos" (click)="playInMainFrameWithVideoId(videoData.videoRenderer.videoId);">
+          <div class="thumbnail">
+            <img [src]='videoData.videoRenderer.thumbnail.thumbnails[0].url' class="thumbnail" frameborder="0" allowfullscreen="false" />
+          </div>
+          <div class="title-text">
+            <label>{{videoData.videoRenderer.title.runs[0].text}}</label>
+          </div>          
+        </div>
+          
+      </ul>
+    </div>
+  </div>
+
+</div>
