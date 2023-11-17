@@ -53,19 +53,19 @@ export class AppComponent {
   getSearchResults() : Observable<VideoData[]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': 'http://13.126.48.46:8080'
+        'Access-Control-Allow-Origin': 'https://youtube-services.onrender.com/'
       })
     };
-    return this.http.get<VideoData[]>("http://13.126.48.46:8080/search/query?q="+this.ytTextOrURL, httpOptions);
+    return this.http.get<VideoData[]>("https://youtube-services.onrender.com/search/query?q="+this.ytTextOrURL, httpOptions);
   }
 
   getRelatedVideos(videoId:string) : Observable<CompactVideoData[]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': 'http://13.126.48.46:8080'
+        'Access-Control-Allow-Origin': 'https://youtube-services.onrender.com'
       })
     };
-    return this.http.get<CompactVideoData[]>("http://13.126.48.46:8080/search/related?videoId=" + videoId, httpOptions);
+    return this.http.get<CompactVideoData[]>("https://youtube-services.onrender.com/search/related?videoId=" + videoId, httpOptions);
   }
 
   playInMainFrameWithVideoId(videoId:string) {
