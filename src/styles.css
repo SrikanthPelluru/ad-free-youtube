@@ -462,7 +462,7 @@ body {
                 width: 100%;
                 .play-frame {
                     padding: 12px 0px 0px 0px;
-                    height: auto;
+                    height: 313px;
                     position: sticky;
                     top: 63px;
                     margin: 0 auto;
@@ -471,10 +471,11 @@ body {
                     alignment-baseline: middle;
                     display: block;
                     border-radius: 20px;
+                    width: 100%;
                 }
             }
             .show-related-videos {
-                margin: 20px 0px 0 20px;
+                margin: 20px 10px 0 10px;
                 height: 720px;
                 overflow-x: hidden;
                 overflow-y: auto;
