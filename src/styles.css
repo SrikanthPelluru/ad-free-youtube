@@ -399,6 +399,7 @@ body {
                         border-radius: 37px;
                         margin: 0 auto;
                         display: block;
+                        min-width: 507px;
                     }
                 }
                 .video-info {
@@ -463,7 +464,7 @@ body {
                 width: 100%;
                 .play-frame {
                     padding: 12px 0px 0px 0px;
-                    height: 247px;
+                    height: 241px;
                     position: sticky;
                     top: 63px;
                     margin: 0 auto;
@@ -508,6 +509,7 @@ body {
                                 width: 184px;
                                 height: auto;
                                 border-radius: 19px;
+                                min-width: 184px;
                             }
                         }
                         .video-info {
