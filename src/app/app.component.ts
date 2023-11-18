@@ -26,6 +26,7 @@ export class AppComponent implements OnInit{
   isVideoPlaying:boolean = false;
   isSearching:boolean = true;
   player!:YT.Player;
+  serviceBaseUrl:string = "http://localhost:8080/";
 
   constructor(private sanitizer:DomSanitizer, private http: HttpClient) {
     this.relatedVideos = [];
@@ -83,28 +84,28 @@ export class AppComponent implements OnInit{
   getSearchResults() : Observable<VideoData[]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': 'https://youtube-services.onrender.com/'
+        'Access-Control-Allow-Origin': this.serviceBaseUrl
       })
     };
-    return this.http.get<VideoData[]>("https://youtube-services.onrender.com/search/query?q="+this.ytTextOrURL, httpOptions);
+    return this.http.get<VideoData[]>(this.serviceBaseUrl + "search/query?q="+this.ytTextOrURL, httpOptions);
   }
 
   getTrendingResults() : Observable<VideoData[]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': 'https://youtube-services.onrender.com/'
+        'Access-Control-Allow-Origin': this.serviceBaseUrl
       })
     };
-    return this.http.get<VideoData[]>("https://youtube-services.onrender.com/search/trending", httpOptions);
+    return this.http.get<VideoData[]>(this.serviceBaseUrl + "search/trending", httpOptions);
   }
 
   getRelatedVideos(videoId:string) : Observable<CompactVideoData[]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': 'https://youtube-services.onrender.com/'
+        'Access-Control-Allow-Origin': this.serviceBaseUrl
       })
     };
-    return this.http.get<CompactVideoData[]>("https://youtube-services.onrender.com/search/related?videoId=" + videoId, httpOptions);
+    return this.http.get<CompactVideoData[]>(this.serviceBaseUrl + "search/related?videoId=" + videoId, httpOptions);
   }
 
   playInMainFrameWithVideoId(videoId:string) {
@@ -122,11 +123,15 @@ export class AppComponent implements OnInit{
     setTimeout(() => {
       this.player = new window.YT.Player('player', {});
       this.player.addEventListener("onStateChange", (event:any) => {
+        console.log(event.data);
         if(event.data == 0) {
           this.playInMainFrameWithVideoId(this.videosData[0].videoRenderer.videoId);
         }
+        if (event.data != 0 && event.data != 1 && event.data != 2 && event.data != 3) {
+          this.playInMainFrameWithVideoId(this.videosData[1].videoRenderer.videoId);
+        }
       })
-    }, 5000);
+    }, 1000);
   }
   
   onPlayerReady(event:Event) {
@@ -180,6 +185,19 @@ export class AppComponent implements OnInit{
             },
             "lengthText" : {
               "simpleText" : compactData.compactVideoRenderer.lengthText.simpleText
+            },
+            "publishedTimeText" : {
+              "simpleText" : compactData.compactVideoRenderer.publishedTimeText.simpleText
+            },
+            "viewCountText" : {
+              "simpleText" : compactData.compactVideoRenderer.viewCountText.simpleText
+            },
+            "longBylineText" : {
+              "runs" : [
+                {
+                  "text" : compactData.compactVideoRenderer.longBylineText.runs[0].text
+                }
+              ]
             }
           }
         }

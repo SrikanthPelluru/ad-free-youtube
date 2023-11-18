@@ -1,3 +1,5 @@
+import { LongBylineText, PublishedTimeText, ViewCountText } from "./video-data";
+
 export interface CompactVideoData {
     compactVideoRenderer: CompactVideoRenderer;
 }
@@ -7,6 +9,10 @@ interface CompactVideoRenderer {
     thumbnail:Thumbnail;
     title: SimpleTitle;
     lengthText: LengthText;
+    publishedTimeText:PublishedTimeText;
+    viewCountText:ViewCountText;
+    longBylineText:LongBylineText;
+
 }
 
 interface LengthText {

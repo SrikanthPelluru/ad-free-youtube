@@ -43,6 +43,7 @@ body {
 
         .center {
             flex: 0 1 753px;
+            margin-right: 186px;
             min-width: 0;
             display: flexbox;
             display: flex;
@@ -195,7 +196,7 @@ body {
         }
         .show-related-videos {
             width: 25%;
-            margin: 0px 0px 0 27px;
+            margin: 27px 0px 0 27px;
             .static-text {
                 font-size: 27px;
                 background-color: lightseagreen;
