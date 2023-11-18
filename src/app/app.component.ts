@@ -85,28 +85,28 @@ export class AppComponent implements OnInit{
   getSearchResults() : Observable<VideoData[]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': 'http://localhost:8080/'
+        'Access-Control-Allow-Origin': 'https://youtube-services.onrender.com/'
       })
     };
-    return this.http.get<VideoData[]>("http://localhost:8080/search/query?q="+this.ytTextOrURL, httpOptions);
+    return this.http.get<VideoData[]>("https://youtube-services.onrender.com/search/query?q="+this.ytTextOrURL, httpOptions);
   }
 
   getTrendingResults() : Observable<VideoData[]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': 'http://localhost:8080/'
+        'Access-Control-Allow-Origin': 'https://youtube-services.onrender.com/'
       })
     };
-    return this.http.get<VideoData[]>("http://localhost:8080/search/trending", httpOptions);
+    return this.http.get<VideoData[]>("https://youtube-services.onrender.com/search/trending", httpOptions);
   }
 
   getRelatedVideos(videoId:string) : Observable<CompactVideoData[]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': 'http://localhost:8080'
+        'Access-Control-Allow-Origin': 'https://youtube-services.onrender.com/'
       })
     };
-    return this.http.get<CompactVideoData[]>("http://localhost:8080/search/related?videoId=" + videoId, httpOptions);
+    return this.http.get<CompactVideoData[]>("https://youtube-services.onrender.com/search/related?videoId=" + videoId, httpOptions);
   }
 
   playInMainFrameWithVideoId(videoId:string) {
