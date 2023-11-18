@@ -390,11 +390,11 @@ body {
             display: flex;
             flex: 1;
             flex-basis: 1e-9px;
-            padding: 11px 0px 0px 12px;
+            padding: 11px 0px 0px 0px;
             .video-renderer {
                 .video-thumbnail {
                     .thumbnail-image {
-                        width: 364px;
+                        width: 100%;
                         height: auto;
                         border-radius: 37px;
                         margin: 0 auto;
@@ -458,11 +458,12 @@ body {
     
         .play-section {
             position: fixed;
+            width: 95%;
             .play-video {
                 width: 100%;
                 .play-frame {
                     padding: 12px 0px 0px 0px;
-                    height: 313px;
+                    height: 247px;
                     position: sticky;
                     top: 63px;
                     margin: 0 auto;
