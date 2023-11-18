@@ -1,11 +1,9 @@
-import { AfterContentInit, AfterViewInit, Component, EventEmitter, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { VideoData } from './interface/video-data';
 import { CompactVideoData } from './interface/compact-video-data';
-import { YouTubePlayer} from '@angular/youtube-player'
-import * as Player from '@vimeo/player';
 
 
 @Component({
