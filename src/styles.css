@@ -399,7 +399,6 @@ body {
                         border-radius: 37px;
                         margin: 0 auto;
                         display: block;
-                        min-width: 507px;
                     }
                 }
                 .video-info {
@@ -509,8 +508,6 @@ body {
                                 width: 184px;
                                 height: auto;
                                 border-radius: 19px;
-                                min-width: 95vw;
-                                max-width: 95vw;
                             }
                         }
                         .video-info {
