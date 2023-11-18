@@ -1,5 +1,76 @@
-<div class="container">
-  <div class="search-context">
+<div class="container" (keyup.enter)="searchTextOrURL()">
+
+  <div class="header">
+    <div class="start" (click)="populateTrendingVideos()">
+      <img class="yt-green-icon" />
+      <label class="youtube-text">Ad Free Youtube</label>
+    </div>
+    <div class="center">
+      <div class="search-box">
+        <input type="text" [(ngModel)]="ytTextOrURL" placeholder="Search" class="search-input"  />
+      </div>
+      <div>
+        <img class="search-icon" (click)="searchTextOrURL()"/>
+      </div>
+    </div>
+    <div class="end"></div>
+  </div>
+  <div *ngIf='!isVideoPlaying' class="result-header">
+    {{videoType}}
+    <hr/>
+  </div>
+  <div *ngIf="isSearching">
+    <img class="loading-icon" />
+  </div>
+  <div *ngIf='!isVideoPlaying' class="position-absolute">
+  <div class="show-results" *ngFor="let videoData of videosData" (click)="playInMainFrameWithVideoId(videoData.videoRenderer.videoId)">
+    <div class="video-renderer">
+        <div class="video-thumbnail">
+          <img class="thumbnail-image" [src]='videoData.videoRenderer.thumbnail.thumbnails[0].url'/>
+        </div>
+        <div class="video-info">
+          <div class="title-text">
+            {{videoData.videoRenderer.title.runs[0].text}}
+          </div>
+          <div class="views-text">
+            814k views - 2 months ago
+          </div>
+          <div class="video-owner-text">
+            Aditya Music Telugu
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+  <div class="play-section" *ngIf="isVideoPlaying">
+    <div class="play-video">
+      <iframe class="play-frame" id="player" [src]="safeUrl" frameborder="0" allowfullscreen  allow='autoplay'></iframe>
+    </div>
+    <div *ngIf="isVideoPlaying" class="show-related-videos">
+      <label class="static-text">
+        Related Videos
+      </label>  
+      <div class="show-results" *ngFor="let videoData of videosData" (click)="playInMainFrameWithVideoId(videoData.videoRenderer.videoId)">
+        <div class="video-renderer">
+            <div class="video-thumbnail">
+              <img class="thumbnail-image" [src]='videoData.videoRenderer.thumbnail.thumbnails[0].url'/>
+            </div>
+            <div class="video-info">
+              <div class="title-text">
+                {{videoData.videoRenderer.title.runs[0].text}}
+              </div>
+              <div class="views-text">
+                814k views - 2 months ago
+              </div>
+              <div class="video-owner-text">
+                Aditya Music Telugu
+              </div>
+            </div>
+        </div>
+      </div>
+  </div>
+  </div>
+  <!-- <div class="search-context">
     <h3 class="static-info">Search any youtube content!!! or Paste your youtube link below!!!</h3>
     <input type="text" class="input-text" [(ngModel)]="ytTextOrURL" placeholder="Paste Yotube URL or Search Youtube Content">
     <button class="search-button" (click)="searchTextOrURL()" >
@@ -25,6 +96,6 @@
           
       </ul>
     </div>
-  </div>
+  </div> -->
 
 </div>

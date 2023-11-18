@@ -1,16 +1,19 @@
-import { AfterContentInit, AfterViewInit, Component, HostListener } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, EventEmitter, HostListener, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { VideoData } from './interface/video-data';
 import { CompactVideoData } from './interface/compact-video-data';
+import { YouTubePlayer} from '@angular/youtube-player'
+import * as Player from '@vimeo/player';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 
   title = 'Add free youtube';
   ytVideoBaseUrl:string = 'https://www.youtube.com/embed/';
@@ -21,9 +24,34 @@ export class AppComponent {
   videosData: VideoData[] = [];
   compactVideoData: CompactVideoData[] = [];
   playedVideoIds:string[] = [];
+  videoType:string = '';
+  isVideoPlaying:boolean = false;
+  isSearching:boolean = true;
+  player!:YT.Player;
 
   constructor(private sanitizer:DomSanitizer, private http: HttpClient) {
     this.relatedVideos = [];
+  }
+  ngOnInit(): void {
+    this.populateTrendingVideos();
+  }
+
+  populateTrendingVideos() {
+    this.isSearching = true;
+    this.getTrendingResults().subscribe((videoData: VideoData[]) => {
+      if (videoData) {
+        this.isVideoPlaying = false;
+        this.videoType = 'Trending Videos';
+        this.videosData = videoData;
+        this.clearRelatedVideos();
+        this.showInMainFrameWithVideoId(videoData[0].videoRenderer.videoId);
+        //this.playInMainFrameWithVideoId(videoData[0].videoRenderer.videoId);
+        videoData.forEach( data => {
+          this.addThumbnailToRelatedVideos(data.videoRenderer.videoId);
+        })
+      }
+    })
+    this.isSearching = false;
   }
 
   searchTextOrURL() {
@@ -35,9 +63,12 @@ export class AppComponent {
       }
       this.showInMainFrameWithVideoId(this.ytTextOrURL.substring(startIndex, endIndex));
       this.addThumbnailToRelatedVideos(this.ytTextOrURL.substring(startIndex, endIndex));
-    } else {
+    } else if (this.ytTextOrURL.length > 0){
+      this.isSearching = true;
       this.getSearchResults().subscribe((videoData: VideoData[]) => {
         if (videoData) {
+          this.isVideoPlaying = false;
+          this.videoType = 'Search Videos';
           this.videosData = videoData;
           this.clearRelatedVideos();
           this.showInMainFrameWithVideoId(videoData[0].videoRenderer.videoId);
@@ -47,30 +78,41 @@ export class AppComponent {
           })
         }
       })
+      this.isSearching = false;
     }
   }
 
   getSearchResults() : Observable<VideoData[]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': 'https://youtube-services.onrender.com/'
+        'Access-Control-Allow-Origin': 'http://localhost:8080/'
       })
     };
-    return this.http.get<VideoData[]>("https://youtube-services.onrender.com/search/query?q="+this.ytTextOrURL, httpOptions);
+    return this.http.get<VideoData[]>("http://localhost:8080/search/query?q="+this.ytTextOrURL, httpOptions);
+  }
+
+  getTrendingResults() : Observable<VideoData[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': 'http://localhost:8080/'
+      })
+    };
+    return this.http.get<VideoData[]>("http://localhost:8080/search/trending", httpOptions);
   }
 
   getRelatedVideos(videoId:string) : Observable<CompactVideoData[]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': 'https://youtube-services.onrender.com'
+        'Access-Control-Allow-Origin': 'http://localhost:8080'
       })
     };
-    return this.http.get<CompactVideoData[]>("https://youtube-services.onrender.com/search/related?videoId=" + videoId, httpOptions);
+    return this.http.get<CompactVideoData[]>("http://localhost:8080/search/related?videoId=" + videoId, httpOptions);
   }
 
   playInMainFrameWithVideoId(videoId:string) {
+    this.isVideoPlaying = true;
     this.playedVideoIds.push(videoId);
-    this.safeUrl= this.sanitizer.bypassSecurityTrustResourceUrl(this.ytVideoBaseUrl + videoId + "?autoplay=1&showinfo=0");
+    this.safeUrl= this.sanitizer.bypassSecurityTrustResourceUrl(this.ytVideoBaseUrl + videoId + "?autoplay=1&showinfo=0&enablejsapi=1");
     this.getRelatedVideos(videoId).subscribe((compactVideoData:CompactVideoData[]) => {
       if(compactVideoData) {
         this.compactVideoData = compactVideoData;
@@ -79,6 +121,22 @@ export class AppComponent {
         this.mapCompactDataToVideoData(compactVideoData);  
       }
     })
+    setTimeout(() => {
+      this.player = new window.YT.Player('player', {});
+      this.player.addEventListener("onStateChange", (event:any) => {
+        if(event.data == 0) {
+          this.playInMainFrameWithVideoId(this.videosData[0].videoRenderer.videoId);
+        }
+      })
+    }, 5000);
+  }
+  
+  onPlayerReady(event:Event) {
+    console.log(event);
+  }
+
+  onStateChange(event:Event) {
+    alert("Hammayya" );
   }
 
   showInMainFrameWithVideoId(videoId:string) {
