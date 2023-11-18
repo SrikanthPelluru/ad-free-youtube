@@ -26,7 +26,7 @@ export class AppComponent implements OnInit{
   isVideoPlaying:boolean = false;
   isSearching:boolean = true;
   player!:YT.Player;
-  serviceBaseUrl:string = "http://localhost:8080/";
+  serviceBaseUrl:string = "https://youtube-services.onrender.com/";
 
   constructor(private sanitizer:DomSanitizer, private http: HttpClient) {
     this.relatedVideos = [];
