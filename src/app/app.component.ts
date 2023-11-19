@@ -119,12 +119,12 @@ export class AppComponent implements OnInit{
       this.player.addEventListener("onStateChange", (event:any) => {
         console.log(event.data);
         if(event.data == YT.PlayerState.ENDED) {
-          this.playInMainFrameWithVideoId(this.videosData[0].videoRenderer.videoId, this.videosData[0]!.videoRenderer!.title!.runs[0]!.text);
+          this.playInMainFrameWithVideoId(this.videosData[0]?.videoRenderer?.videoId, this.videosData[0]?.videoRenderer?.title?.runs[0]?.text);
         }
       });
       this.player.addEventListener("onError", (event:any) => {
         setTimeout(() => {
-        this.playInMainFrameWithVideoId(this.videosData[0].videoRenderer.videoId, this.videosData[0]!.videoRenderer!.title!.runs[0]!.text);
+        this.playInMainFrameWithVideoId(this.videosData[0]?.videoRenderer?.videoId, this.videosData[0]?.videoRenderer?.title?.runs[0]?.text);
         }, 5000);
       })
     }, 1000);
@@ -139,8 +139,8 @@ export class AppComponent implements OnInit{
           this.clearVideosData();  
         }
         this.mapCompactDataToVideoData(compactVideoData);
-        if (this.videosData.length > 0 && this.videosData.length < 30) {
-          this.updateRelatedVideos(this.videosData[0].videoRenderer.videoId, true);
+        if (this.videosData?.length > 0 && this.videosData?.length < 30) {
+          this.updateRelatedVideos(this.videosData[0]?.videoRenderer?.videoId, true);
         }
       }
     })
@@ -162,47 +162,47 @@ export class AppComponent implements OnInit{
 
   mapCompactDataToVideoData(compactVideoData: CompactVideoData[]) {
     compactVideoData.forEach(compactData => {
-      if (!this.playedVideoIds.includes(compactData.compactVideoRenderer.videoId) &&
-          !this.relatedVideos.includes(compactData.compactVideoRenderer.videoId)) {
+      if (!this.playedVideoIds?.includes(compactData?.compactVideoRenderer?.videoId) &&
+          !this.relatedVideos?.includes(compactData?.compactVideoRenderer?.videoId)) {
         let videoData:VideoData = {
           "videoRenderer" : {
-            "videoId" : compactData.compactVideoRenderer.videoId,
+            "videoId" : compactData?.compactVideoRenderer?.videoId,
             "title" : {
               "runs" : [
                 {
-                  "text" : compactData.compactVideoRenderer.title.simpleText
+                  "text" : compactData?.compactVideoRenderer?.title?.simpleText
                 }
               ]
             },
             "thumbnail" : {
               "thumbnails" : [
                 {
-                  "url" : compactData.compactVideoRenderer.thumbnail.thumbnails[0].url,
-                  "height" : compactData.compactVideoRenderer.thumbnail.thumbnails[0].height,
-                  "width" : compactData.compactVideoRenderer.thumbnail.thumbnails[0].width
+                  "url" : compactData?.compactVideoRenderer?.thumbnail?.thumbnails[0]?.url,
+                  "height" : compactData?.compactVideoRenderer?.thumbnail?.thumbnails[0]?.height,
+                  "width" : compactData?.compactVideoRenderer?.thumbnail?.thumbnails[0]?.width
                 }
               ]
             },
             "lengthText" : {
-              "simpleText" : compactData.compactVideoRenderer.lengthText.simpleText
+              "simpleText" : compactData?.compactVideoRenderer?.lengthText?.simpleText
             },
             "publishedTimeText" : {
-              "simpleText" : compactData.compactVideoRenderer.publishedTimeText.simpleText
+              "simpleText" : compactData?.compactVideoRenderer?.publishedTimeText?.simpleText
             },
             "viewCountText" : {
-              "simpleText" : compactData.compactVideoRenderer.viewCountText.simpleText
+              "simpleText" : compactData?.compactVideoRenderer?.viewCountText?.simpleText
             },
             "longBylineText" : {
               "runs" : [
                 {
-                  "text" : compactData.compactVideoRenderer.longBylineText.runs[0].text
+                  "text" : compactData?.compactVideoRenderer?.longBylineText?.runs[0]?.text
                 }
               ]
             }
           }
         }
         this.videosData.push(videoData);
-        this.relatedVideos.push(videoData.videoRenderer.videoId);
+        this.relatedVideos.push(videoData?.videoRenderer?.videoId);
       }
     })
   }

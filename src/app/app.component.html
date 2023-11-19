@@ -25,20 +25,20 @@
     <img class="loading-icon" />
   </div>
   <div *ngIf='!isVideoPlaying' class="position-absolute">
-  <div class="show-results" *ngFor="let videoData of videosData" (click)="playInMainFrameWithVideoId(videoData.videoRenderer.videoId, videoData!.videoRenderer!.title!.runs[0]!.text)">
+  <div class="show-results" *ngFor="let videoData of videosData" (click)="playInMainFrameWithVideoId(videoData!.videoRenderer!.videoId, videoData!.videoRenderer!.title!.runs[0]!.text)">
     <div class="video-renderer">
         <div class="video-thumbnail">
-          <img class="thumbnail-image" [src]='videoData.videoRenderer.thumbnail.thumbnails[0].url'/>
+          <img class="thumbnail-image" [src]='videoData!.videoRenderer!.thumbnail!.thumbnails[0]!.url'/>
         </div>
         <div class="video-info">
           <div class="title-text">
-            {{videoData!.videoRenderer!.title!.runs[0]!.text}}
+            {{videoData.videoRenderer.title.runs[0].text}}
           </div>
           <div class="views-text">
-            {{videoData!.videoRenderer!.viewCountText!.simpleText}} - {{videoData!.videoRenderer!.publishedTimeText!.simpleText}}
+            {{videoData?.videoRenderer?.viewCountText?.simpleText}} - {{videoData?.videoRenderer?.publishedTimeText?.simpleText}}
           </div>
           <div class="video-owner-text">
-            {{videoData!.videoRenderer!.longBylineText!.runs[0]!.text}}
+            {{videoData.videoRenderer.longBylineText.runs[0].text}}
           </div>
         </div>
     </div>
@@ -56,17 +56,17 @@
       <div class="show-results" *ngFor="let videoData of videosData" (click)="playInMainFrameWithVideoId(videoData!.videoRenderer!.videoId, videoData!.videoRenderer!.title!.runs[0]!.text)">
         <div class="video-renderer">
             <div class="video-thumbnail">
-              <img class="thumbnail-image" [src]='videoData.videoRenderer.thumbnail.thumbnails[0].url'/>
+              <img class="thumbnail-image" [src]='videoData!.videoRenderer!.thumbnail!.thumbnails[0]!.url'/>
             </div>
             <div class="video-info">
               <div class="title-text">
-                {{videoData!.videoRenderer!.title!.runs[0]!.text}}
+                {{videoData.videoRenderer.title.runs[0].text}}
               </div>
               <div class="views-text">
-                {{videoData!.videoRenderer!.viewCountText!.simpleText}} - {{videoData!.videoRenderer!.publishedTimeText!.simpleText}}
+                {{videoData?.videoRenderer?.viewCountText?.simpleText}} - {{videoData?.videoRenderer?.publishedTimeText?.simpleText}}
               </div>
               <div class="video-owner-text">
-                {{videoData!.videoRenderer!.longBylineText!.runs[0]!.text}}
+                {{videoData.videoRenderer.longBylineText.runs[0].text}}
               </div>
             </div>
         </div>
