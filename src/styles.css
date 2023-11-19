@@ -198,6 +198,8 @@ body {
                 position: sticky;
                 top: 63px;
             }
+        }
+        .title {
             .play-title {
                 color: var(--yt-spec-text-primary);
                 font-family: "Roboto","Arial",sans-serif;
@@ -215,6 +217,7 @@ body {
                 position: fixed;
             }
         }
+
         .show-related-videos {
             width: 25%;
             margin: 27px 0px 0 27px;
@@ -494,7 +497,6 @@ body {
             width: 95%;
             .play-video {
                 width: 100%;
-                padding: 0 0 35px 0px;
                 .play-frame {
                     padding: 12px 0px 0px 0px;
                     height: 241px;
@@ -508,7 +510,9 @@ body {
                     border-radius: 20px;
                     width: 100%;
                 }
-
+            }
+            .title {
+                min-height: 27px;
                 .play-title {
                     color: var(--yt-spec-text-primary);
                     font-family: "Roboto","Arial",sans-serif;
@@ -526,6 +530,7 @@ body {
                     position: fixed;
                 }
             }
+
             .show-related-videos {
                 margin: 20px 10px 0 10px;
                 height: 720px;
