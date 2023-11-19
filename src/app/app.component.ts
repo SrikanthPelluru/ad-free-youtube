@@ -17,15 +17,17 @@ export class AppComponent implements OnInit{
   ytVideoBaseUrl:string = 'https://www.youtube.com/embed/';
   ytThumbnailBaseUrl:string = 'https://img.youtube.com/vi/';
   safeUrl:SafeResourceUrl='';
+  safeUrlTitle:string ='';
   ytTextOrURL = '';
   relatedVideos: string[];
   videosData: VideoData[] = [];
   compactVideoData: CompactVideoData[] = [];
   playedVideoIds:string[] = [];
-  videoType:string = '';
+  videoType:string = 'Trending Videos';
   isVideoPlaying:boolean = false;
   isSearching:boolean = true;
   player!:YT.Player;
+  hideSearchHeader:boolean = false;
   serviceBaseUrl:string = "https://youtube-services.onrender.com/";
 
   constructor(private sanitizer:DomSanitizer, private http: HttpClient) {
@@ -43,14 +45,9 @@ export class AppComponent implements OnInit{
         this.videoType = 'Trending Videos';
         this.videosData = videoData;
         this.clearRelatedVideos();
-        this.showInMainFrameWithVideoId(videoData[0].videoRenderer.videoId);
-        //this.playInMainFrameWithVideoId(videoData[0].videoRenderer.videoId);
-        videoData.forEach( data => {
-          this.addThumbnailToRelatedVideos(data.videoRenderer.videoId);
-        })
       }
+      this.isSearching = false;
     })
-    this.isSearching = false;
   }
 
   searchTextOrURL() {
@@ -61,7 +58,7 @@ export class AppComponent implements OnInit{
         endIndex = this.ytTextOrURL.indexOf('&');
       }
       this.showInMainFrameWithVideoId(this.ytTextOrURL.substring(startIndex, endIndex));
-      this.addThumbnailToRelatedVideos(this.ytTextOrURL.substring(startIndex, endIndex));
+      this.updateRelatedVideos(this.ytTextOrURL.substring(startIndex, endIndex), false);
     } else if (this.ytTextOrURL.length > 0){
       this.isSearching = true;
       this.getSearchResults().subscribe((videoData: VideoData[]) => {
@@ -70,14 +67,9 @@ export class AppComponent implements OnInit{
           this.videoType = 'Search Videos';
           this.videosData = videoData;
           this.clearRelatedVideos();
-          this.showInMainFrameWithVideoId(videoData[0].videoRenderer.videoId);
-          //this.playInMainFrameWithVideoId(videoData[0].videoRenderer.videoId);
-          videoData.forEach( data => {
-            this.addThumbnailToRelatedVideos(data.videoRenderer.videoId);
-          })
+          this.isSearching = false;
         }
       })
-      this.isSearching = false;
     }
   }
 
@@ -108,49 +100,53 @@ export class AppComponent implements OnInit{
     return this.http.get<CompactVideoData[]>(this.serviceBaseUrl + "search/related?videoId=" + videoId, httpOptions);
   }
 
-  playInMainFrameWithVideoId(videoId:string) {
+  showSeachHeader() {
+    this.hideSearchHeader = false;
+    setTimeout(() => {
+      this.hideSearchHeader = true;
+    }, 20000)
+  }
+
+  playInMainFrameWithVideoId(videoId:string, title:string) {
     this.isVideoPlaying = true;
+    this.hideSearchHeader = true;
     this.playedVideoIds.push(videoId);
     this.safeUrl= this.sanitizer.bypassSecurityTrustResourceUrl(this.ytVideoBaseUrl + videoId + "?autoplay=1&showinfo=0&enablejsapi=1");
-    this.getRelatedVideos(videoId).subscribe((compactVideoData:CompactVideoData[]) => {
-      if(compactVideoData) {
-        this.compactVideoData = compactVideoData;
-        this.clearRelatedVideos();
-        this.clearVideosData();
-        this.mapCompactDataToVideoData(compactVideoData);  
-      }
-    })
+    this.safeUrlTitle = title;
+    this.updateRelatedVideos(videoId, false);
     setTimeout(() => {
       this.player = new window.YT.Player('player', {});
       this.player.addEventListener("onStateChange", (event:any) => {
         console.log(event.data);
-        if(event.data == 0) {
-          this.playInMainFrameWithVideoId(this.videosData[0].videoRenderer.videoId);
+        if(event.data == YT.PlayerState.ENDED) {
+          this.playInMainFrameWithVideoId(this.videosData[0].videoRenderer.videoId, this.videosData[0]!.videoRenderer!.title!.runs[0]!.text);
         }
-        if (event.data != 0 && event.data != 1 && event.data != 2 && event.data != 3) {
-          this.playInMainFrameWithVideoId(this.videosData[1].videoRenderer.videoId);
-        }
+      });
+      this.player.addEventListener("onError", (event:any) => {
+        setTimeout(() => {
+        this.playInMainFrameWithVideoId(this.videosData[0].videoRenderer.videoId, this.videosData[0]!.videoRenderer!.title!.runs[0]!.text);
+        }, 5000);
       })
     }, 1000);
   }
-  
-  onPlayerReady(event:Event) {
-    console.log(event);
-  }
 
-  onStateChange(event:Event) {
-    alert("Hammayya" );
-  }
-
-  showInMainFrameWithVideoId(videoId:string) {
-    this.safeUrl= this.sanitizer.bypassSecurityTrustResourceUrl(this.ytVideoBaseUrl + videoId);
-  }
-
-  addThumbnailToRelatedVideos(videoId: string) {
-    let thumbnail = this.ytThumbnailBaseUrl + videoId +"/hqdefault.jpg"
-      if (!this.relatedVideos.includes(thumbnail)) {
-        this.relatedVideos.push(thumbnail);
+  updateRelatedVideos(videoId:string, appendVideos:boolean) {
+    this.getRelatedVideos(videoId).subscribe((compactVideoData:CompactVideoData[]) => {
+      if(compactVideoData) {
+        this.compactVideoData = compactVideoData;
+        if (!appendVideos) {
+          this.clearRelatedVideos();
+          this.clearVideosData();  
+        }
+        this.mapCompactDataToVideoData(compactVideoData);  
       }
+    })
+  }
+  
+  showInMainFrameWithVideoId(videoId:string) {
+    this.isVideoPlaying = true;
+    this.safeUrl= this.sanitizer.bypassSecurityTrustResourceUrl(this.ytVideoBaseUrl + videoId);
+    this.safeUrlTitle = '';
   }
 
   clearRelatedVideos() {
@@ -163,7 +159,8 @@ export class AppComponent implements OnInit{
 
   mapCompactDataToVideoData(compactVideoData: CompactVideoData[]) {
     compactVideoData.forEach(compactData => {
-      if (!this.playedVideoIds.includes(compactData.compactVideoRenderer.videoId)) {
+      if (!this.playedVideoIds.includes(compactData.compactVideoRenderer.videoId) &&
+          !this.relatedVideos.includes(compactData.compactVideoRenderer.videoId)) {
         let videoData:VideoData = {
           "videoRenderer" : {
             "videoId" : compactData.compactVideoRenderer.videoId,
@@ -202,7 +199,14 @@ export class AppComponent implements OnInit{
           }
         }
         this.videosData.push(videoData);
+        this.relatedVideos.push(videoData.videoRenderer.videoId);
       }
-    })
+    },
+    () => {
+      if (this.videosData.length > 0 && this.videosData.length < 30) {
+        this.updateRelatedVideos(this.videosData[0].videoRenderer.videoId, true);
+      }
+    }
+    )
   }
 }
