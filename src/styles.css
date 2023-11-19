@@ -198,8 +198,7 @@ body {
                 position: sticky;
                 top: 63px;
             }
-        }
-        .title {
+
             .play-title {
                 color: var(--yt-spec-text-primary);
                 font-family: "Roboto","Arial",sans-serif;
@@ -217,7 +216,7 @@ body {
                 position: fixed;
             }
         }
-
+        
         .show-related-videos {
             width: 25%;
             margin: 27px 0px 0 27px;
@@ -396,6 +395,7 @@ body {
                 padding: 0 0 -2px 5px;
                 min-height: 25px;
                 margin-right: 20px;
+                color: white;
             }
         }
     
@@ -510,9 +510,7 @@ body {
                     border-radius: 20px;
                     width: 100%;
                 }
-            }
-            .title {
-                min-height: 27px;
+
                 .play-title {
                     color: var(--yt-spec-text-primary);
                     font-family: "Roboto","Arial",sans-serif;
@@ -530,9 +528,9 @@ body {
                     position: fixed;
                 }
             }
-
+            
             .show-related-videos {
-                margin: 20px 10px 0 10px;
+                margin: 51px 10px 0 10px;
                 height: 720px;
                 overflow-x: hidden;
                 overflow-y: auto;

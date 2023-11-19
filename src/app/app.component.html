@@ -47,8 +47,6 @@
   <div class="play-section" *ngIf="isVideoPlaying">
     <div class="play-video">
       <iframe class="play-frame" id="player" [src]="safeUrl" frameborder="0" allowfullscreen  allow='autoplay'></iframe>
-    </div>
-    <div class="title">
       <label class="play-title">{{safeUrlTitle}}</label>
     </div>
     <div *ngIf="isVideoPlaying" class="show-related-videos">

@@ -138,7 +138,10 @@ export class AppComponent implements OnInit{
           this.clearRelatedVideos();
           this.clearVideosData();  
         }
-        this.mapCompactDataToVideoData(compactVideoData);  
+        this.mapCompactDataToVideoData(compactVideoData);
+        if (this.videosData.length > 0 && this.videosData.length < 30) {
+          this.updateRelatedVideos(this.videosData[0].videoRenderer.videoId, true);
+        }
       }
     })
   }
@@ -201,12 +204,6 @@ export class AppComponent implements OnInit{
         this.videosData.push(videoData);
         this.relatedVideos.push(videoData.videoRenderer.videoId);
       }
-    },
-    () => {
-      if (this.videosData.length > 0 && this.videosData.length < 30) {
-        this.updateRelatedVideos(this.videosData[0].videoRenderer.videoId, true);
-      }
-    }
-    )
+    })
   }
 }
