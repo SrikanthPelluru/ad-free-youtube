@@ -362,6 +362,9 @@ body {
                     flex: 1;
                     flex-basis: 1e-9px;
                     text-wrap: nowrap;
+                    display: flexbox;
+                    display: flex;
+                    flex-direction: row;
     
                     .search-input {
                         box-sizing: border-box;
