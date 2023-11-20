@@ -23,14 +23,14 @@ body {
             .yt-green-icon {
                 background-image: url('assets/images/yt-icon-green.svg');
                 background-repeat: no-repeat;
-                width: 75px;
-                height: 75px;
+                width: 49px;
+                height: 49px;
                 padding: 5px;
             }
             .youtube-text {
-                font-size: xx-large;
+                font-size: larger;
                 margin: auto;
-                font-weight: 900;
+                font-weight: 700;
                 color: green;
             }
         }
@@ -61,21 +61,24 @@ body {
                     box-sizing: border-box;
                     padding: 1px 0;
                     margin: 0;
-                    width: 100%;
-                    height: 55px;
+                    width: 73%;
+                    height: 31px;
                     border-radius: 33px;
-                    font-size: 32px;
+                    font-size: 18px;
                     padding-left: 21px;
                     border-color: green;
                 }
-            }
-            .search-icon {
-                background-image: url('/assets/images/search-icon.png');
-                width: 51px;
-                height: 51px;
-                background-color: lightgray;
-                cursor: pointer;
-                border-radius: 43px;
+
+                .search-icon {
+                    background-image: url('/assets/images/search-icon-green.jpg');
+                    width: 29px;
+                    height: 31px;
+                    background-color: lightgray;
+                    cursor: pointer;
+                    border-radius: 43px;
+                    background-repeat: no-repeat;
+                    margin: 0 0 -9px 0px;
+                }
             }
         }
         .end {
@@ -91,21 +94,21 @@ body {
 
     .result-header {
         font-family: "Copperplate", "Courier New", monospace;
-        font-size: 28px;
+        font-size: 22px;
         font-weight: 600;
         margin: 23px 105px 0 105px;
         position: sticky;
         top: 83px;
         text-wrap: nowrap;
         text-decoration-line: underline;
+        color: darkgreen;
     }
 
     .loading-icon {
-        background-image: url(/assets/images/loading-new.gif);
-        width: 81%;
-        height: 469px;
+        background-image: url(/assets/images/Ellipsis-loading.svg);
+        width: 80%;
+        height: 100px;
         margin: auto;
-        border-radius: 43px;
         display: block;
     }
 
@@ -117,8 +120,8 @@ body {
         display: flex;
         flex: 1;
         flex-basis: 1e-9px;
-        padding: 25px 23px 0px 23px;
-        margin: 23px 105px 0 105px;
+        padding: 0px 23px 0px 23px;
+        margin: 9px 105px 0 105px;
 
         .video-renderer {
             position: relative;
@@ -128,7 +131,7 @@ body {
             align-items: flex-start;
             .video-thumbnail {
                 .thumbnail-image {
-                    width: 360px;
+                    width: 223px;
                     height: auto;
                     border-radius: 37px;
                 }
@@ -138,9 +141,9 @@ body {
                 .title-text {
                     color: var(--yt-spec-text-primary);
                     font-family: "Roboto","Arial",sans-serif;
-                    font-size: 1.8rem;
-                    line-height: 2.6rem;
-                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 26px;
+                    font-weight: 600;
                     overflow: hidden;
                     display: block;
                     max-height: 5.2rem;
@@ -152,8 +155,8 @@ body {
                 }
                 .views-text {
                     font-family: "Roboto","Arial",sans-serif;
-                    font-size: 1.2rem;
-                    line-height: 1.8rem;
+                    font-size: 13px;
+                    line-height: 18px;
                     font-weight: 400;
                     overflow: hidden;
                     display: block;
@@ -169,9 +172,9 @@ body {
                     color: var(--yt-spec-text-secondary);
                     align-self: center;
                     font-family: "Roboto","Arial",sans-serif;
-                    font-size: 1.2rem;
-                    line-height: 1.8rem;
-                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 18px;
+                    font-weight: 600;
                     overflow: hidden;
                     display: block;
                     max-height: 1.8rem;
@@ -193,8 +196,7 @@ body {
             width: 75%;
             .play-frame {
                 width: 100%;
-                padding: 29px 0px 0px 0px;
-                height: 701px;
+                height: 76vh;
                 position: sticky;
                 top: 63px;
             }
@@ -202,7 +204,7 @@ body {
             .play-title {
                 color: var(--yt-spec-text-primary);
                 font-family: "Roboto","Arial",sans-serif;
-                font-size: 1.8rem;
+                font-size: 1.2rem;
                 line-height: 2.6rem;
                 font-weight: 600;
                 overflow: hidden;
@@ -214,17 +216,22 @@ body {
                 white-space: normal;
                 display: -webkit-box;
                 position: fixed;
+                max-width: 75%;
             }
         }
         
         .show-related-videos {
             width: 25%;
-            margin: 27px 0px 0 27px;
+            margin: 0px 0px 0 15px;
+            overflow-x: clip;
+            background-color: #f4f1f1;
+            padding: 0 0 0 5px;
+            
             .static-text {
-                font-size: 27px;
-                background-color: lightseagreen;
+                font-size: 19px;
+                background-color: lightgrey;
                 font-weight: bold;
-                color: white;
+                color: #086c0d;
                 text-wrap: nowrap;
             }
 
@@ -244,7 +251,7 @@ body {
                     align-items: flex-start;
                     .video-thumbnail {
                         .thumbnail-image {
-                            width: 184px;
+                            width: 121px;
                             height: auto;
                             border-radius: 19px;
                         }
@@ -252,11 +259,11 @@ body {
                     .video-info {
                         padding: 0px 0px 0px 7px;
                         .title-text {
-                            margin: 0 0 9px 0;
+                            margin: 0 0 5px 0;
                             font-family: "Roboto","Arial",sans-serif;
-                            font-size: 1.0rem;
-                            line-height: 1.2rem;
-                            font-weight: 900;
+                            font-size: 11px;
+                            line-height: 13px;
+                            font-weight: 700;
                             overflow: hidden;
                             display: block;
                             max-height: 4rem;
@@ -268,8 +275,8 @@ body {
                         }
                         .views-text {
                             font-family: "Roboto","Arial",sans-serif;
-                            font-size: 1rem;
-                            line-height: 1.4rem;
+                            font-size: 8px;
+                            line-height: 12px;
                             font-weight: 400;
                             overflow: hidden;
                             display: block;
@@ -285,9 +292,9 @@ body {
                             color: var(--yt-spec-text-secondary);
                             align-self: center;
                             font-family: "Roboto","Arial",sans-serif;
-                            font-size: 1rem;
+                            font-size: 11px;
+                            font-weight: 600;
                             line-height: 1.4rem;
-                            font-weight: 400;
                             overflow: hidden;
                             display: block;
                             max-height: 1.8rem;
@@ -361,20 +368,21 @@ body {
                         padding: 1px 0;
                         margin: 0;
                         width: 100%;
-                        height: 40px;
+                        height: 30px;
                         border-radius: 33px;
-                        font-size: 21px;
+                        font-size: 16px;
                         padding-left: 12px;
                         border-color: green;
                     }
                 }
                 .search-icon {
-                    background-image: url('/assets/images/search-icon-mini.png');
+                    background-image: url('/assets/images/search-icon-green.jpg');
                     width: 34px;
                     height: 34px;
                     background-color: lightgray;
                     cursor: pointer;
-                    border-radius: 11px;
+                    border-radius: 26px;
+                    margin-bottom: -11px;
                 }
             }
             .end {
@@ -387,15 +395,12 @@ body {
             display: none;
         }
         .hidden-search {
-            min-height: 11px;
-            .search-hidden-button {
-                background-color: green;
-                border-radius: 20px;
+            .search-icon {
+                background-image: url(/assets/images/search-icon-green.jpg);
+                width: 31px;
+                height: 30px;
+                cursor: pointer;
                 float: right;
-                padding: 0 0 -2px 5px;
-                min-height: 25px;
-                margin-right: 20px;
-                color: white;
             }
         }
     
@@ -411,9 +416,9 @@ body {
         }
     
         .loading-icon {
-            background-image: url(/assets/images/loading-new.gif);
+            background-image: url(/assets/images/Ellipsis-loading.svg);
             width: 100%;
-            height: 469px;
+            height: 100px;
             margin: auto;
             border-radius: 43px;
             display: block;
@@ -498,7 +503,7 @@ body {
             .play-video {
                 width: 100%;
                 .play-frame {
-                    padding: 12px 0px 0px 0px;
+                    padding: 4px 0px 0px 0px;
                     height: 241px;
                     position: sticky;
                     top: 63px;
@@ -507,7 +512,7 @@ body {
                     text-align: center;
                     alignment-baseline: middle;
                     display: block;
-                    border-radius: 20px;
+                    border-radius: 61px;
                     width: 100%;
                 }
 
