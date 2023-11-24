@@ -1,0 +1,38 @@
+.shorts-container {
+    height: 100vh;
+
+    .back-button {
+        background-image: url('../../../assets/images/back-button.png');
+        background-repeat: no-repeat;
+        width: 48px;
+        height: 48px;
+        border-radius: 111px;
+        margin: auto;
+        cursor: pointer;
+        position: fixed;
+        top: 90px;
+        opacity: 0.8;
+
+    }
+
+    .shorts-inner-container {
+        .play-frame {
+            display: block;
+            margin: auto;
+            height: 93vh;
+            border-radius: 17px;
+            @media only screen and (max-width: 450px) {
+                width: 100%;
+            }
+        }
+        .play-title {
+            display: block;
+            text-align: center;
+            font-family: "Roboto","Arial",sans-serif;
+            font-size: 1.4rem;
+            line-height: 2rem;
+            font-weight: 400;
+            min-height: 35px;
+        }
+    }
+}

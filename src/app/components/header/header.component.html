@@ -1,0 +1,16 @@
+<div class="header" (keyup.enter)="search()">
+    <div *ngIf="showBackButton" class="back-div">
+      <img class="back-button" (click)="backToHome()" />
+    </div>
+    <div class="start" (click)="populateRecommendedVideos()">
+      <img class="yt-green-icon" />
+      <label class="youtube-text">Ad Free Youtube</label>
+    </div>
+    <div class="center">
+      <div class="search-box">
+        <input type="text" [(ngModel)]="ytTextOrURL" placeholder="Search" class="search-input"  />
+        <img class="search-icon" (click)="search()"/>
+      </div>
+    </div>
+    <div class="end"></div>
+</div>

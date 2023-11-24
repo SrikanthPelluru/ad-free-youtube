@@ -1,0 +1,17 @@
+<div class="flex">
+    <div class="show-results" *ngFor="let reel of reelItemRenderer">
+        <div class="reel-renderer" (click)="playShort(reel.videoId, reel.headline.simpleText)">
+        <div class="reel-thumbnail">
+            <img class="thumbnail-image" [src]='reel!.thumbnail!.thumbnails[0]!.url'/>
+        </div>
+        <div class="video-info">
+            <div class="title-text">
+            {{reel.headline.simpleText}}
+            </div>
+            <div class="views-text">
+            {{reel?.viewCountText?.simpleText}}
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

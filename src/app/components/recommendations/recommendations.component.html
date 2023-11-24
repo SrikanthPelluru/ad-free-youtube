@@ -1,0 +1,13 @@
+<div>
+  <mat-tab-group #tabGroup mat-stretch-tabs="false" mat-align-tabs="start" (selectedTabChange)="onTabChanged();">
+    <mat-tab label="Shorts"> 
+     <app-reel></app-reel> 
+    </mat-tab>
+    <mat-tab label="Videos">
+      <app-video [videos]="videos"></app-video>
+    </mat-tab>
+    <mat-tab label="Trending Videos">
+      <app-video [videos]="trendingVideos"></app-video>
+    </mat-tab>
+  </mat-tab-group>  
+</div>

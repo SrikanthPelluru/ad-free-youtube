@@ -1,0 +1,7 @@
+<div id="short-container" class="shorts-container">
+    <img class="back-button" (click)="backToHome()" />
+    <div class="shorts-inner-container" *ngFor="let short of shorts; index as i">
+        <iframe class="play-frame" [id]="i" [src]="short.src" frameborder="0" allowfullscreen  allow='autoplay'></iframe>
+        <label class="play-title">{{short.title}}</label>
+    </div>
+</div>

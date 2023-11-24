@@ -1,0 +1,32 @@
+<app-header></app-header>
+<app-loading></app-loading>
+
+<div>
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="Videos"> 
+      <div class="video-list">
+        <div class="show-results" *ngFor="let videoData of videoRenderer" (click)="play(videoData!.videoId, videoData!.title!.runs[0]!.text)">
+          <div class="video-renderer">
+              <div class="video-thumbnail">
+                <img class="thumbnail-image" [src]='videoData!.thumbnail!.thumbnails[0]!.url'/>
+              </div>
+              <div class="video-info">
+                <div class="title-text">
+                  {{videoData.title.runs[0].text}}
+                </div>
+                <div class="views-text">
+                  {{videoData?.viewCountText?.simpleText}} - {{videoData?.publishedTimeText?.simpleText}}
+                </div>
+                <div class="video-owner-text">
+                  {{videoData.longBylineText.runs[0].text}}
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Shorts">
+      <app-reel></app-reel> 
+    </mat-tab>
+  </mat-tab-group>  
+</div>

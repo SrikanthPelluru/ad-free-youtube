@@ -2,7 +2,7 @@ export interface VideoData {
     videoRenderer: VideoRenderer;
 }
 
-interface VideoRenderer {
+export interface VideoRenderer {
     videoId:string;
     thumbnail: Thumbnail;
     title: Title;
@@ -24,7 +24,7 @@ export interface PublishedTimeText {
     simpleText:string;
 }
 
-interface Title {
+export interface Title {
     runs: Runs[];
 }
 
@@ -36,7 +36,7 @@ interface Runs {
     text:string;
 }
 
-interface Thumbnail {
+export interface Thumbnail {
     thumbnails: Thumbnails[];
 }
 
