@@ -116,11 +116,11 @@
             display: flex;
             flex-direction: row;
             .back-button {
-                background-image: url('../../../assets/images/back-button.png');
+                background-image: url('../../../assets/images/back-button-32.png');
                 background-repeat: no-repeat;
-                width: 48px;
-                height: 48px;
-                border-radius: 111px;
+                width: 32px;
+                height: 32px;
+                border-radius: 72px;
                 margin: auto;
                 cursor: pointer;
             }

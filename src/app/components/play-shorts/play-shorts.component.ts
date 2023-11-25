@@ -127,6 +127,11 @@ export class PlayShortsComponent implements AfterViewInit {
     if (document.getElementById(index+"") && window && window.YT && window.YT.Player) {
       let player:YT.Player = new YT.Player(index+"", {});
       this.playerList.push(player);
+      let iframe = <HTMLIFrameElement>document.getElementById(index+"");
+      iframe.onscroll = () => {
+        console.log("scrollinggggg");
+        this.onContentScrolled();
+      }
     } else {
       setTimeout(() => {
         this.loadToPlayerList(index);

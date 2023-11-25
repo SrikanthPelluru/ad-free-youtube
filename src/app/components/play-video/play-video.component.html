@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="play-section">
     <div class="play-video">
-      <iframe class="play-frame" id="player" [src]="src" frameborder="0" allowfullscreen  allow='autoplay'></iframe>
+      <iframe class="play-frame" id="player" [src]="src" playsinline frameborder="0" allowfullscreen  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'></iframe>
       <label class="play-title">{{title}}</label>
     </div>
     <div class="show-related-videos">

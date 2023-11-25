@@ -167,15 +167,15 @@
                         .title-text {
                             margin: 0 0 9px 0;
                             font-family: "Roboto","Arial",sans-serif;
-                            font-size: 1.0rem;
-                            line-height: 1.2rem;
-                            font-weight: 900;
+                            font-size: 12px;
+                            line-height: 15px;
+                            font-weight: 700;
                             overflow: hidden;
                         }
                         .views-text {
                             font-family: "Roboto","Arial",sans-serif;
-                            font-size: 0.8rem;
-                            line-height: 0.8rem;
+                            font-size: 10px;
+                            line-height: 10px;
                             font-weight: 400;
                             overflow: hidden;
                         }
@@ -183,8 +183,8 @@
                             padding: 0px 10px 10px 0px;
                             align-self: center;
                             font-family: "Roboto","Arial",sans-serif;
-                            font-size: 1rem;
-                            line-height: 1.4rem;
+                            font-size: 12px;
+                            line-height: 24px;
                             font-weight: 600;
                             display: flex;
                             flex-direction: row;                

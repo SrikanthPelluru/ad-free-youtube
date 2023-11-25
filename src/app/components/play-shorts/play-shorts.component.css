@@ -2,10 +2,17 @@
     height: 100vh;
 
     .back-button {
-        background-image: url('../../../assets/images/back-button.png');
+        @media only screen and (max-width: 800px) {
+            background-image: url('../../../assets/images/back-button-32.png');
+            width: 48px;
+            height: 48px;
+        }
+        @media only screen and (min-width: 800px) {
+            background-image: url("../../../assets/images/back-button.png");
+            width: 48px;
+            height: 48px;
+        }
         background-repeat: no-repeat;
-        width: 48px;
-        height: 48px;
         border-radius: 111px;
         margin: auto;
         cursor: pointer;
