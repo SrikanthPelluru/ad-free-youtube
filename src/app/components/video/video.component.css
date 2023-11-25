@@ -7,18 +7,24 @@
         display: flex;
         flex: 1;
         flex-basis: 1e-9px;
-        padding: 0px 3px 6px 10px;
         margin: 0 0 0 0;
         
         .video-renderer {
             display: block;
-            max-width: 249px;
+            @media only screen and (min-width: 800px) {
+               max-width: 249px;
+            }
             @media only screen and (max-width: 450px) {
                 margin: 0 auto;
             }
             .video-thumbnail {
                 .thumbnail-image {
-                    width: 249px;
+                    @media only screen and (min-width: 800px) {
+                        width: 249px;
+                    }
+                    @media only screen and (max-width: 450px) {
+                        width: 95vw;
+                    }
                     height: auto;
                     border-radius: 17px;
                 }
@@ -67,6 +73,9 @@
                     overflow: hidden;
                 }
             }
+        }
+        .video-renderer:hover {
+            cursor: pointer;
         }
     }
 }

@@ -157,7 +157,7 @@
                     align-items: flex-start;
                     .video-thumbnail {
                         .thumbnail-image {
-                            width: 184px;
+                            width: 159px;
                             height: auto;
                             border-radius: 19px;
                         }
@@ -169,8 +169,9 @@
                             font-family: "Roboto","Arial",sans-serif;
                             font-size: 12px;
                             line-height: 15px;
-                            font-weight: 700;
+                            font-weight: 600;
                             overflow: hidden;
+                            max-height: 31px;
                         }
                         .views-text {
                             font-family: "Roboto","Arial",sans-serif;
