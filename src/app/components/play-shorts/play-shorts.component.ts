@@ -58,28 +58,9 @@ export class PlayShortsComponent implements AfterViewInit {
     if (scroll > this.currentPosition && !this.scrolled) {
       if (!this.scrolled) {
         this.scrolled = true;
-        const currentId = this.currentPlayingId;
-        const nextId = currentId + 1;
-        if (this.playerList[currentId])
-          this.playerList[currentId].pauseVideo();
-        if (this.playerList[nextId])
-          this.playerList[nextId].playVideo();
-
-          
-        setTimeout(() => {
-          this.scroller.scrollToAnchor("" + nextId);
-        }, 1000);
-        
-        setTimeout(() => {
-          this.scrolled = false;
-          this.currentPosition = window.scrollY;
-          this.currentPlayingId = nextId;
-          if ((this.shorts.length - this.currentPlayingId) < 30) {
-            this.loadRelatedShorts(this.shorts[this.currentPlayingId].videoId);
-          }
-        }, 3000);
+        this.playNext();
       }
-    } else {
+    } else if (scroll < this.currentPosition){
       if (!this.scrolled) {
         this.scrolled = true;
         if (this.currentPlayingId < 0) {
@@ -98,6 +79,7 @@ export class PlayShortsComponent implements AfterViewInit {
           }, 1000);
           
           setTimeout(() => {
+            this.scroller.scrollToAnchor("" + previousId);
             this.scrolled = false;
             this.currentPosition = window.scrollY;
             this.currentPlayingId = previousId;
@@ -126,16 +108,43 @@ export class PlayShortsComponent implements AfterViewInit {
   loadToPlayerList(index:number) {
     if (document.getElementById(index+"") && window && window.YT && window.YT.Player) {
       let player:YT.Player = new YT.Player(index+"", {});
+      player.addEventListener("onStateChange", (event:any) => {
+        if(event.data == YT.PlayerState.ENDED) {
+          this.playNext();
+        }
+      });
+      player.addEventListener("onError", () => {
+          this.playNext();
+      });
       this.playerList.push(player);
-      let iframe = <HTMLIFrameElement>document.getElementById(index+"");
-      iframe.onscroll = () => {
-        console.log("scrollinggggg");
-        this.onContentScrolled();
-      }
     } else {
       setTimeout(() => {
         this.loadToPlayerList(index);
       }, 1000);
     }
+  }
+
+  playNext() {
+    const currentId = this.currentPlayingId;
+    const nextId = currentId + 1;
+    if (this.playerList[currentId])
+      this.playerList[currentId].pauseVideo();
+    if (this.playerList[nextId])
+      this.playerList[nextId].playVideo();
+
+      
+    setTimeout(() => {
+      this.scroller.scrollToAnchor("" + nextId);
+    }, 1000);
+    
+    setTimeout(() => {
+      this.scroller.scrollToAnchor("" + nextId);
+      this.scrolled = false;
+      this.currentPosition = window.scrollY;
+      this.currentPlayingId = nextId;
+      if ((this.shorts.length - this.currentPlayingId) < 30) {
+        this.loadRelatedShorts(this.shorts[this.currentPlayingId].videoId);
+      }
+    }, 3000);
   }
 }
