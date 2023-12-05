@@ -134,7 +134,7 @@ export class AppServiceService {
           this.emptyRelatedVideos();
         }
         this.mapCompactDataToVideoData(compactVideoData);
-        if (this.searchVideoSource.getValue().length > 0 && this.searchVideoSource.getValue().length < 50) {
+        if (this.searchVideoSource.getValue().length > 0 && this.searchVideoSource.getValue().length < 20) {
           this.updateRelatedVideos(this.searchVideoSource.getValue()[0].videoRenderer?.videoId, true);
         }
       }
