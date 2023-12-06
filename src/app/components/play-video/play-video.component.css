@@ -59,18 +59,6 @@
                         height: auto;
                         border-radius: 19px;
                     }
-                    .length-text {
-                        background-color: white;
-                        font-weight: bolder;
-                        border-radius: 5px;
-                        padding: 0 0 0 0px;
-                        float: right;
-                        margin: -27px 0px 0px 0px;
-                        position: relative;
-                        font-size: 9px;
-                        letter-spacing: 1px;
-                        color: #008000;
-                    }
                 }
                 .video-info {
                     padding: 0px 0px 0px 7px;
@@ -173,20 +161,7 @@
                             height: auto;
                             border-radius: 19px;
                         }
-
-                        .length-text {
-                            background-color: white;
-                            font-weight: bolder;
-                            border-radius: 5px;
-                            padding: 0 0 0 0px;
-                            float: right;
-                            margin: -27px 0px 0px 0px;
-                            position: relative;
-                            font-size: 9px;
-                            letter-spacing: 1px;
-                            color: #008000;
-                        }
-                    }
+                   }
                     .video-info {
                         padding: 0px 0px 0px 7px;
                         .title-text {
@@ -220,4 +195,17 @@
             }
         }
     }
+}
+
+.length-text {
+    background-color: white;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 0 0 0 0px;
+    float: right;
+    margin: -27px 0px 0px 0px;
+    position: relative;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: #008000;
 }
