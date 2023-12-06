@@ -3,6 +3,7 @@
         <div class="video-renderer" (click)="playVideo(video.videoId, video.title.runs[0].text)">
             <div class="video-thumbnail">
             <img class="thumbnail-image" [src]='video!.thumbnail!.thumbnails[0]!.url'/>
+            <label class="length-text">{{video?.lengthText?.simpleText}}</label>
             </div>
             <div class="video-info">
             <div class="title-text">

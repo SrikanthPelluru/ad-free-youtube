@@ -20,13 +20,31 @@
             .video-thumbnail {
                 .thumbnail-image {
                     @media only screen and (min-width: 800px) {
-                        width: 249px;
+                        width: 211px;
                     }
                     @media only screen and (max-width: 450px) {
                         width: 95vw;
                     }
                     height: auto;
                     border-radius: 17px;
+                }
+
+                .length-text {
+                        background-color: white;
+                        font-weight: bolder;
+                        border-radius: 5px;
+                        padding: 0 0 0 0px;
+                        float: right;
+                        @media only screen and (min-width: 800px) {
+                            margin: -28px 42px 0px 0px;
+                        }
+                        @media only screen and (max-width: 450px) {
+                            margin: -30px 0px 0px 0px;
+                        }
+                        position: relative;
+                        font-size: 13px;
+                        letter-spacing: 1px;
+                        color: #008000;
                 }
             }
 
