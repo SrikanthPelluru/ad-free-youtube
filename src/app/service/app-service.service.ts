@@ -37,6 +37,16 @@ export class AppServiceService {
     this.emptyTheRecommendedVideos();
     this.router.navigate(['']);
     this.showLoading();
+    // var newWindow = window.open("https://www.youtube.com", '', 'height=,width=,resizable=no');
+    // if (newWindow) {
+    //   newWindow.onload = () => {
+    //     console.log("yes it worked!!");
+    //   }
+    // }
+    // newWindow?.addEventListener('load', () => {
+    //   console.log("new page is loaded!!!");
+    //   console.log(newWindow);
+    // });
     this.loadRecommendations().subscribe((initialData:YoutubeInitialData) => {
       initialData.richGridRenderer.contents.forEach(content => {
         if (content && content.richItemRenderer && content.richItemRenderer.content && content.richItemRenderer.content.videoRenderer) {
@@ -127,6 +137,7 @@ export class AppServiceService {
   }
 
   updateRelatedVideos(videoId: string, appendVideos:boolean) {
+    this.playedVideoIds.push(videoId);
     this.getRelatedVideos(videoId).subscribe(compactVideoData => {
       if (compactVideoData) {
         if (!appendVideos) {
