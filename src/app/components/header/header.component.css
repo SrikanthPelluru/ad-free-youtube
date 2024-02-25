@@ -81,6 +81,15 @@
                 }
             }
 
+            .cross-mark {
+                cursor: pointer;
+                margin-left: -33px;
+                border: 0px;
+                margin-right: 15px;
+                width: 27px;
+                height: 27px;
+                border-radius: 15px;
+            }
             .search-icon {
                 background-image: url('/assets/images/search-icon-green.jpg');
                 width: 29px;
@@ -179,6 +188,15 @@
                     padding-left: 12px;
                     border-color: green;
                 }
+            }
+            .cross-mark {
+                cursor: pointer;
+                margin-left: -33px;
+                border: 0px;
+                margin-right: 15px;
+                width: 29px;
+                height: 25px;
+                border-radius: 15px;
             }
             .search-icon {
                 background-image: url('/assets/images/search-icon-green.jpg');

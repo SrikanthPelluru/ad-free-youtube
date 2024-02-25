@@ -17,7 +17,7 @@
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="search()">
         <mat-option *ngFor="let option of suggestions;" [value]="option">{{option}}</mat-option>
       </mat-autocomplete>
-      
+      <button class="cross-mark" (click)="clearSearchText()">X</button>
       <img class="search-icon" (click)="search()"/>
     </div>
   </div>

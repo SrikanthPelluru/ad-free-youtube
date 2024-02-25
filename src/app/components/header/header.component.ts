@@ -37,6 +37,10 @@ export class HeaderComponent {
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
+  clearSearchText() {
+    this.ytTextOrURL = "";
+  }
+
   search() {
     if (this.ytTextOrURL.length > 0) {
       this.appService.updateSearchText.next(this.ytTextOrURL);
