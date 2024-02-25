@@ -17,6 +17,10 @@ import { ReelComponent } from './components/reel/reel.component';
 import { VideoComponent } from './components/video/video.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatFormFieldModule} from '@angular/material/form-field'
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {AsyncPipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,11 @@ import { MatTabsModule } from '@angular/material/tabs';
     HttpClientModule,
     YouTubePlayerModule,
     BrowserAnimationsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    AsyncPipe
   ],
   providers: [],
   bootstrap: [AppComponent]

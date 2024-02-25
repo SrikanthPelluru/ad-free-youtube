@@ -24,6 +24,7 @@ export class AppServiceService {
   
   currentShortVideoSource:BehaviorSubject<SafeResourceUrl> = new BehaviorSubject<SafeResourceUrl>('');
   currentShortTitleSource:BehaviorSubject<string> = new BehaviorSubject<string>("");
+  updateSearchText:BehaviorSubject<string> = new BehaviorSubject<string>("");
 
   showBackButtonSource:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   
@@ -235,6 +236,10 @@ export class AppServiceService {
       })
     };
     return httpOptions;
+  }
+
+  getSuggestions(q:string): Observable<string[]> {
+    return this.http.get<string[]>(AppConstants.SERVICE_BASE_URL + "search/getSuggestedText?q=" + q, this.getHttpHeaders());
   }
 
 }
