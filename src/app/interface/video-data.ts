@@ -45,3 +45,13 @@ interface Thumbnails {
     width:number;
     height:number;
 }
+
+export interface PlayNext {
+    videoId: string,
+    title: string
+}
+
+export interface AddToQueue {
+    videoId: string,
+    title: string
+}

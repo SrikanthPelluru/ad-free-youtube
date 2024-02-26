@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppConstants } from 'src/app/constants/app-constants';
-import { VideoData } from 'src/app/interface/video-data';
+import { AddToQueue, PlayNext, VideoData } from 'src/app/interface/video-data';
 import { AppServiceService } from 'src/app/service/app-service.service';
 
 @Component({
@@ -15,6 +15,9 @@ export class PlayVideoComponent {
   title:string = '';
   videos:VideoData[] = [];
   player!:YT.Player;
+  playNextVideoData:PlayNext[] = [];
+  addToQueueData:AddToQueue[] = [];
+
   
   constructor(private sanitizer:DomSanitizer, private router:Router, private activatedRoute:ActivatedRoute, private appService:AppServiceService) {
     let videoId = this.activatedRoute.snapshot.params['videoId'];
@@ -40,15 +43,45 @@ export class PlayVideoComponent {
       this.player = new window.YT.Player('player', {});
       this.player.addEventListener("onStateChange", (event:any) => {
         if(event.data == YT.PlayerState.ENDED) {
-          this.play(this.videos[0]?.videoRenderer?.videoId, this.videos[0]?.videoRenderer?.title?.runs[0]?.text);
+          if (this.playNextVideoData && this.playNextVideoData.length > 0) {
+            this.playNextVideo();
+          } else if (this.addToQueueData && this.addToQueueData.length > 0) {
+            this.playQueuedVideo();
+          } else {
+            this.play(this.videos[0]?.videoRenderer?.videoId, this.videos[0]?.videoRenderer?.title?.runs[0]?.text);
+          }
         }
       });
       this.player.addEventListener("onError", (event:any) => {
         setTimeout(() => {
-        this.play(this.videos[0]?.videoRenderer?.videoId, this.videos[0]?.videoRenderer?.title?.runs[0]?.text);
+          if (this.playNextVideoData && this.playNextVideoData.length > 0) {
+            this.playNextVideo();
+          } else if (this.addToQueueData && this.addToQueueData.length > 0) {
+            this.playQueuedVideo();
+          } else {
+            this.play(this.videos[0]?.videoRenderer?.videoId, this.videos[0]?.videoRenderer?.title?.runs[0]?.text);
+          }
         }, 5000);
       });
     }, 3000);
+  }
+
+  playNext(videoId:string, title:string) {
+    this.playNextVideoData.push({videoId, title});
+  }
+
+  addToQueue(videoId:string, title:string) {
+    this.addToQueueData.push({videoId, title});
+  }
+
+  playNextVideo() {
+    this.play(this.playNextVideoData[0].videoId, this.playNextVideoData[0].title);
+    this.playNextVideoData.shift();
+  }
+
+  playQueuedVideo() {
+    this.play(this.addToQueueData[0].videoId, this.addToQueueData[0].title);
+    this.addToQueueData.shift();
   }
 
 }

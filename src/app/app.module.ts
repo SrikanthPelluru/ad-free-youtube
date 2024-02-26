@@ -20,6 +20,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
 import {AsyncPipe} from '@angular/common';
 
 @NgModule({
@@ -46,7 +49,10 @@ import {AsyncPipe} from '@angular/common';
     MatFormFieldModule,
     MatAutocompleteModule,
     MatInputModule,
-    AsyncPipe
+    AsyncPipe,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
